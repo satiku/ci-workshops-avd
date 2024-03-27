@@ -50,7 +50,7 @@ vlan_interfaces:
   shutdown: false
   ip_address: 10.2.253.1/31
   no_autostate: true
-  mtu: 1500
+  mtu: 9214
 port_channel_interfaces:
 - name: Port-Channel1
   description: MLAG_PEER_s2-leaf1_Po1

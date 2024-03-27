@@ -166,14 +166,14 @@ aaa authorization exec default local
 
 | CV Compression | CloudVision Servers | VRF | Authentication | Smash Excludes | Ingest Exclude | Bypass AAA |
 | -------------- | ------------------- | --- | -------------- | -------------- | -------------- | ---------- |
-| gzip | 192.168.0.5:9910 | - | token,/tmp/token | ale,flexCounter,hardware,kni,pulse,strata | /Sysdb/cell/1/agent,/Sysdb/cell/2/agent | False |
+| gzip | 192.168.0.5:9910# Login Banner | - | - | - | - | False |
 
 #### TerminAttr Daemon Device Configuration
 
 ```eos
 !
 daemon TerminAttr
-   exec /usr/bin/TerminAttr -cvaddr=192.168.0.5:9910 -cvauth=token,/tmp/token -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent -taillogs
+   exec /usr/bin/TerminAttr -cvaddr=192.168.0.5:9910# Login Banner -taillogs
    no shutdown
 ```
 
@@ -293,8 +293,8 @@ vlan 4094
 
 | Interface | Description | Type | Channel Group | IP Address | VRF |  MTU | Shutdown | ACL In | ACL Out |
 | --------- | ----------- | -----| ------------- | ---------- | ----| ---- | -------- | ------ | ------- |
-| Ethernet7 | P2P_LINK_TO_WANCORE_Ethernet2 | routed | - | 10.0.0.31/31 | default | 1500 | False | - | - |
-| Ethernet8 | P2P_LINK_TO_WANCORE_Ethernet2 | routed | - | 10.0.0.35/31 | default | 1500 | False | - | - |
+| Ethernet7 | P2P_LINK_TO_WANCORE_Ethernet2 | routed | - | 10.0.0.31/31 | default | 9214 | False | - | - |
+| Ethernet8 | P2P_LINK_TO_WANCORE_Ethernet2 | routed | - | 10.0.0.35/31 | default | 9214 | False | - | - |
 
 #### Ethernet Interfaces Device Configuration
 
@@ -333,7 +333,7 @@ interface Ethernet6
 interface Ethernet7
    description P2P_LINK_TO_WANCORE_Ethernet2
    no shutdown
-   mtu 1500
+   mtu 9214
    no switchport
    ip address 10.0.0.31/31
    ip ospf network point-to-point
@@ -342,7 +342,7 @@ interface Ethernet7
 interface Ethernet8
    description P2P_LINK_TO_WANCORE_Ethernet2
    no shutdown
-   mtu 1500
+   mtu 9214
    no switchport
    ip address 10.0.0.35/31
    ip ospf network point-to-point
@@ -426,8 +426,8 @@ interface Loopback0
 | --------- | ----------- | --- | ---- | -------- |
 | Vlan10 | Ten | default | - | False |
 | Vlan20 | Twenty | default | - | False |
-| Vlan4093 | MLAG_PEER_L3_PEERING | default | 1500 | False |
-| Vlan4094 | MLAG_PEER | default | 1500 | False |
+| Vlan4093 | MLAG_PEER_L3_PEERING | default | 9214 | False |
+| Vlan4094 | MLAG_PEER | default | 9214 | False |
 
 ##### IPv4
 
@@ -455,7 +455,7 @@ interface Vlan20
 interface Vlan4093
    description MLAG_PEER_L3_PEERING
    no shutdown
-   mtu 1500
+   mtu 9214
    ip address 10.1.253.3/31
    ip ospf network point-to-point
    ip ospf area 0.0.0.0
@@ -463,7 +463,7 @@ interface Vlan4093
 interface Vlan4094
    description MLAG_PEER
    no shutdown
-   mtu 1500
+   mtu 9214
    no autostate
    ip address 10.1.253.1/31
 ```

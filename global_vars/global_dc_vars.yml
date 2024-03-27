@@ -49,19 +49,8 @@ daemon_terminattr:
   # TCP 9910 is used on on-prem
   # TCP 443 is used on CV as a Service
   cvaddrs: # For single cluster
-    - 192.168.0.5:9910
-  # Authentication scheme used to connect to CloudVision
-  cvauth:
-    method: token
-    token_file: "/tmp/token"
-  # Exclude paths from Sysdb on the ingest side
-  ingestexclude: /Sysdb/cell/1/agent,/Sysdb/cell/2/agent
-  # Exclude paths from the shared memory table
-  smashexcludes: ale,flexCounter,hardware,kni,pulse,strata
-
-# Point to Point Links MTU Override for Lab
-p2p_uplinks_mtu: 1500
-
-# CVP node variables
-cv_collection: v3
-execute_tasks: true
+    - 192.168.0.5:9910# Login Banner
+banners:
+  motd: |
+    You shall not pass. Unless you are authorized. Then you shall pass.
+    EOF
